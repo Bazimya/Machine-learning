@@ -3,12 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>ABC Real Estate AI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: Arial, sans-serif;
+            scroll-behavior: smooth;
         }
 
         body {
@@ -23,56 +26,74 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-        }
-
-        .navbar h1 {
-            font-size: 20px;
+            position: fixed;
+            width: 100%;
+            top: 0;
         }
 
         .navbar a {
             color: white;
             text-decoration: none;
             margin-left: 20px;
-            font-size: 14px;
         }
 
         .navbar a:hover {
             color: #38bdf8;
         }
 
-        /* HERO */
-        .hero {
+        section {
+            padding: 100px 20px;
+            min-height: 100vh;
+        }
+
+        /* HOME */
+        #home {
+            background: linear-gradient(to right, #1e3a8a, #2563eb);
+            color: white;
             text-align: center;
-            padding: 50px 20px;
         }
 
-        .hero h2 {
-            font-size: 28px;
-            margin-bottom: 10px;
+        #home h1 {
+            font-size: 40px;
+            margin-bottom: 15px;
         }
 
-        .hero p {
-            color: #555;
+        #home p {
+            font-size: 18px;
+            opacity: 0.9;
         }
 
-        /* CARD */
-        .container {
+        .stats {
+            margin-top: 40px;
             display: flex;
             justify-content: center;
-            margin-top: 20px;
+            gap: 50px;
+        }
+
+        .stat-box {
+            background: white;
+            color: black;
+            padding: 20px;
+            border-radius: 12px;
+            width: 150px;
+        }
+
+        .stat-box h2 {
+            color: #2563eb;
+        }
+
+        /* PREDICT */
+        #predict {
+            text-align: center;
         }
 
         .card {
             background: white;
             padding: 30px;
             width: 350px;
+            margin: auto;
             border-radius: 15px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-        }
-
-        .card h3 {
-            text-align: center;
-            margin-bottom: 20px;
         }
 
         input {
@@ -91,8 +112,6 @@
             border: none;
             border-radius: 8px;
             cursor: pointer;
-            font-size: 15px;
-            transition: 0.3s;
         }
 
         button:hover {
@@ -104,44 +123,71 @@
             padding: 12px;
             background: #e0f2fe;
             border-radius: 8px;
-            text-align: center;
-            font-weight: bold;
             display: none;
+            font-weight: bold;
+        }
+
+        /* ABOUT */
+        #about {
+            background: #0f172a;
+            color: white;
+            text-align: center;
+        }
+
+        #about p {
+            max-width: 600px;
+            margin: 20px auto;
+            opacity: 0.9;
         }
 
         footer {
             text-align: center;
-            margin-top: 50px;
             padding: 20px;
-            font-size: 13px;
-            color: #777;
+            background: #111827;
+            color: white;
         }
     </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
+
 <body>
 
 <!-- NAVBAR -->
 <div class="navbar">
-    <h1><i class="fa-solid fa-house"></i> ABC Real Estate AI</h1>
+    <h2><i class="fa-solid fa-house"></i> ABC Real Estate AI</h2>
     <div>
-        <a href="#"><i class="fa-solid fa-home"></i> Home</a>
-        <a href="#"><i class="fa-solid fa-chart-line"></i> Predict</a>
-        <a href="#"><i class="fa-solid fa-circle-info"></i> About</a>
+        <a href="#home">Home</a>
+        <a href="#predict">Predict</a>
+        <a href="#about">About</a>
     </div>
 </div>
 
-<!-- HERO SECTION -->
-<div class="hero">
-    <h2>Smart House Price Prediction</h2>
-    <p>Powered by Machine Learning • Built in Kigali 🇷🇼</p>
-</div>
+<!-- HOME SECTION -->
+<section id="home">
+    <h1>Smart Property Pricing in Kigali 🇷🇼</h1>
+    <p>Powered by Machine Learning • Fair • Transparent • Accurate</p>
 
-<!-- FORM CARD -->
-<div class="container">
+    <div class="stats">
+        <div class="stat-box">
+            <h2>2,500+</h2>
+            <p>Listings</p>
+        </div>
+        <div class="stat-box">
+            <h2>1,200+</h2>
+            <p>Users</p>
+        </div>
+        <div class="stat-box">
+            <h2>95%</h2>
+            <p>Accuracy</p>
+        </div>
+    </div>
+</section>
+
+<!-- PREDICT SECTION -->
+<section id="predict">
+    <h2>Predict House Price</h2>
+    <br>
+
     <div class="card">
-        <h3>Enter House Details</h3>
-
         <input type="number" id="size" placeholder="Size (sqm)">
         <input type="number" id="bedrooms" placeholder="Bedrooms">
         <input type="number" id="bathrooms" placeholder="Bathrooms">
@@ -151,7 +197,18 @@
 
         <div class="result" id="result"></div>
     </div>
-</div>
+</section>
+
+<!-- ABOUT SECTION -->
+<section id="about">
+    <h2>About ABC Company</h2>
+    <p>
+        Founded in 2016 in Kigali, ABC Company is a market leader in real estate
+        technology solutions. Our AI-powered pricing system ensures transparency
+        and fairness by predicting property values based on key factors such as
+        size, amenities, and location desirability.
+    </p>
+</section>
 
 <footer>
     © 2026 ABC Company • Real Estate Pricing Intelligence System
@@ -165,9 +222,9 @@ async function predictPrice() {
     const location_score = document.getElementById("location_score").value;
 
     const response = await fetch(
-    `/predict?size=${size}&bedrooms=${bedrooms}&bathrooms=${bathrooms}&location_score=${location_score}`,
-    { method: "POST" }
-);
+        `/predict?size=${size}&bedrooms=${bedrooms}&bathrooms=${bathrooms}&location_score=${location_score}`,
+        { method: "POST" }
+    );
 
     const data = await response.json();
 
