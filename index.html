@@ -165,9 +165,9 @@ async function predictPrice() {
     const location_score = document.getElementById("location_score").value;
 
     const response = await fetch(
-        `http://127.0.0.1:8000/predict?size=${size}&bedrooms=${bedrooms}&bathrooms=${bathrooms}&location_score=${location_score}`,
-        { method: "POST" }
-    );
+    `/predict?size=${size}&bedrooms=${bedrooms}&bathrooms=${bathrooms}&location_score=${location_score}`,
+    { method: "POST" }
+);
 
     const data = await response.json();
 
