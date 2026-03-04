@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ABC Real Estate AI</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f5f7fa;
+        }
+
+        /* NAVBAR */
+        .navbar {
+            background: #0f172a;
+            color: white;
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar h1 {
+            font-size: 20px;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+            font-size: 14px;
+        }
+
+        .navbar a:hover {
+            color: #38bdf8;
+        }
+
+        /* HERO */
+        .hero {
+            text-align: center;
+            padding: 50px 20px;
+        }
+
+        .hero h2 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            color: #555;
+        }
+
+        /* CARD */
+        .container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            width: 350px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+        }
+
+        .card h3 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 15px;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #1d4ed8;
+        }
+
+        .result {
+            margin-top: 20px;
+            padding: 12px;
+            background: #e0f2fe;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: bold;
+            display: none;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            font-size: 13px;
+            color: #777;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+    <h1><i class="fa-solid fa-house"></i> ABC Real Estate AI</h1>
+    <div>
+        <a href="#"><i class="fa-solid fa-home"></i> Home</a>
+        <a href="#"><i class="fa-solid fa-chart-line"></i> Predict</a>
+        <a href="#"><i class="fa-solid fa-circle-info"></i> About</a>
+    </div>
+</div>
+
+<!-- HERO SECTION -->
+<div class="hero">
+    <h2>Smart House Price Prediction</h2>
+    <p>Powered by Machine Learning • Built in Kigali 🇷🇼</p>
+</div>
+
+<!-- FORM CARD -->
+<div class="container">
+    <div class="card">
+        <h3>Enter House Details</h3>
+
+        <input type="number" id="size" placeholder="Size (sqm)">
+        <input type="number" id="bedrooms" placeholder="Bedrooms">
+        <input type="number" id="bathrooms" placeholder="Bathrooms">
+        <input type="number" id="location_score" placeholder="Location Score (1-10)">
+
+        <button onclick="predictPrice()">Predict Price</button>
+
+        <div class="result" id="result"></div>
+    </div>
+</div>
+
+<footer>
+    © 2026 ABC Company • Real Estate Pricing Intelligence System
+</footer>
+
+<script>
+async function predictPrice() {
+    const size = document.getElementById("size").value;
+    const bedrooms = document.getElementById("bedrooms").value;
+    const bathrooms = document.getElementById("bathrooms").value;
+    const location_score = document.getElementById("location_score").value;
+
+    const response = await fetch(
+        `http://127.0.0.1:8000/predict?size=${size}&bedrooms=${bedrooms}&bathrooms=${bathrooms}&location_score=${location_score}`,
+        { method: "POST" }
+    );
+
+    const data = await response.json();
+
+    const resultDiv = document.getElementById("result");
+    resultDiv.style.display = "block";
+    resultDiv.innerText =
+        "Estimated Price: " + data.predicted_price_million_RWF + " Million RWF";
+}
+</script>
+
+</body>
+</html>
